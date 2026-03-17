@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Mascotas{% endblock %}
+{% block content %}
+<h2>Mascotas</h2>
+<section class="split">
+  <div class="card">
+    <h3>Nueva mascota</h3>
+    <form method="post" class="form-grid">
+      <label>Cliente
+        <select name="client_id" required>
+          <option value="">Selecciona</option>
+          {% for client in clients %}<option value="{{ client.id }}">{{ client.name }}</option>{% endfor %}
+        </select>
+      </label>
+      <label>Nombre<input type="text" name="name" required></label>
+      <label>Especie<input type="text" name="species" placeholder="Perro, gato..." required></label>
+      <label>Raza<input type="text" name="breed"></label>
+      <label>Edad<input type="text" name="age"></label>
+      <label>Peso<input type="text" name="weight"></label>
+      <label>Temperamento<input type="text" name="temperament"></label>
+      <label>Notas médicas<textarea name="medical_notes"></textarea></label>
+      <button type="submit">Guardar mascota</button>
+    </form>
+  </div>
+  <div class="card">
+    <h3>Listado</h3>
+    <table>
+      <thead>
+        <tr><th>Mascota</th><th>Cliente</th><th>Especie</th><th>Raza</th></tr>
+      </thead>
+      <tbody>
+        {% for pet in pets %}
+        <tr>
+          <td>{{ pet.name }}</td>
+          <td>{{ pet.client_name }}</td>
+          <td>{{ pet.species }}</td>
+          <td>{{ pet.breed or '-' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">Sin mascotas registradas.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

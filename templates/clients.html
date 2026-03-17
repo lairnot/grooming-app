@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<h2>Clientes</h2>
+<section class="split">
+  <div class="card">
+    <h3>Nuevo cliente</h3>
+    <form method="post" class="form-grid">
+      <label>Nombre completo<input type="text" name="name" required></label>
+      <label>Teléfono<input type="text" name="phone" required></label>
+      <label>WhatsApp<input type="text" name="whatsapp"></label>
+      <label>Dirección<input type="text" name="address"></label>
+      <button type="submit">Guardar cliente</button>
+    </form>
+  </div>
+  <div class="card">
+    <h3>Listado</h3>
+    <table>
+      <thead>
+        <tr><th>Nombre</th><th>Teléfono</th><th>WhatsApp</th></tr>
+      </thead>
+      <tbody>
+        {% for client in clients %}
+        <tr>
+          <td>{{ client.name }}</td>
+          <td>{{ client.phone }}</td>
+          <td>{{ client.whatsapp or '-' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3">Sin clientes registrados.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

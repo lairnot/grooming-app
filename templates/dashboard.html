@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Hola, {{ session.get('full_name') }}</h2>
+<div class="cards">
+  <div class="card stat"><span>{{ stats.clients }}</span><small>Clientes</small></div>
+  <div class="card stat"><span>{{ stats.pets }}</span><small>Mascotas</small></div>
+  <div class="card stat"><span>{{ stats.today_appointments }}</span><small>Citas hoy</small></div>
+  <div class="card stat"><span>{{ stats.services }}</span><small>Servicios</small></div>
+</div>
+
+<section class="card">
+  <h3>Próximas citas</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Cliente</th>
+        <th>Mascota</th>
+        <th>Servicio</th>
+        <th>Estatus</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in upcoming %}
+      <tr>
+        <td>{{ item.appointment_date }}</td>
+        <td>{{ item.appointment_time }}</td>
+        <td>{{ item.client_name }}</td>
+        <td>{{ item.pet_name }}</td>
+        <td>{{ item.service_name }}</td>
+        <td>{{ item.status }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6">No hay citas registradas todavía.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
